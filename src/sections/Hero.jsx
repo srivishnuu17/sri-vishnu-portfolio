@@ -50,7 +50,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
         className="pointer-events-none absolute z-[2] hidden -translate-x-1/2 -translate-y-1/2 select-none object-contain md:block"
-        style={{ left: '63.1%', top: '54.2%', width: 'clamp(190px, 18vw, 320px)' }}
+        style={{ left: '63.1%', top: '57.5%', width: 'clamp(190px, 18vw, 320px)' }}
         draggable="false"
       />
 
