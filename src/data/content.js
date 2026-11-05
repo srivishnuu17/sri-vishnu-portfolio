@@ -13,35 +13,21 @@ export const profile = {
 }
 
 export const skills = {
-  'Core Programming': ['Python', 'C', 'Java', 'SQL'],
-  'Web Development': ['HTML', 'CSS', 'JavaScript', 'React', 'Vite', 'Tailwind CSS'],
-  'Data & Backend': ['Supabase', 'DBMS'],
-  'Tools & Workflow': ['Git', 'GitHub', 'VS Code', 'Arduino IDE', 'Vercel'],
-  'Core Concepts': ['Data Structures', 'OOP', 'Statistics', 'Basic AI/ML'],
+  Languages: ['C', 'Python', 'Java'],
+  Tools: ['Codex', 'Antigravity'],
+  'Frameworks & Backend': ['Supabase', 'FastAPI'],
+  Deployment: ['Vercel'],
 }
 
 export const techNodes = [
-  { name: 'Python', context: 'Core logic, problem solving, and data work' },
-  { name: 'C', context: 'Systems thinking and programming fundamentals' },
-  { name: 'Java', context: 'Object-oriented programming foundation' },
-  { name: 'SQL', context: 'Data queries and database logic' },
-  { name: 'HTML', context: 'Structure and semantic front-end design' },
-  { name: 'CSS', context: 'Visual design and responsive interfaces' },
-  { name: 'JavaScript', context: 'Interactive front-end behavior' },
-  { name: 'React', context: 'Building modern web interfaces' },
-  { name: 'Vite', context: 'Fast front-end build workflow' },
-  { name: 'Tailwind CSS', context: 'Utility-first design system' },
-  { name: 'Supabase', context: 'Backend, storage, and app data' },
-  { name: 'Git', context: 'Version control and collaboration' },
-  { name: 'GitHub', context: 'Project hosting and workflow' },
-  { name: 'VS Code', context: 'Daily development environment' },
-  { name: 'Arduino IDE', context: 'Electronics prototyping and hardware logic' },
-  { name: 'Vercel', context: 'Simple deployment and live delivery' },
-  { name: 'Data Structures', context: 'Efficient algorithmic thinking' },
-  { name: 'OOP', context: 'Modular, reusable object design' },
-  { name: 'DBMS', context: 'Relational database systems' },
-  { name: 'Statistics', context: 'Analysis and data interpretation' },
-  { name: 'Basic AI/ML', context: 'Foundational intelligent systems learning' },
+  { name: 'C', category: 'Language', context: 'Programming fundamentals and systems thinking' },
+  { name: 'Python', category: 'Language', context: 'Scripting, backend development, and problem solving' },
+  { name: 'Java', category: 'Language', context: 'Object-oriented programming' },
+  { name: 'Codex', category: 'Tool', context: 'AI-assisted coding and development workflow' },
+  { name: 'Antigravity', category: 'Tool', context: 'AI-powered development environment' },
+  { name: 'Supabase', category: 'Frameworks & Backend', context: 'Backend services and application data' },
+  { name: 'FastAPI', category: 'Frameworks & Backend', context: 'Building Python APIs' },
+  { name: 'Vercel', category: 'Deployment', context: 'Deploying projects to the web' },
 ]
 
 export const projects = [

@@ -5,6 +5,7 @@ import { techNodes } from '../data/content'
 export default function Skills() {
   const [active, setActive] = useState(null)
   const radius = 42 // percent of container
+  const activeNode = techNodes.find((node) => node.name === active)
 
   return (
     <section id="skills" className="relative bg-void py-32 md:py-44 overflow-hidden">
@@ -16,7 +17,7 @@ export default function Skills() {
           <span className="hidden md:block font-mono text-xs text-mist">03 / 06</span>
         </div>
         <p className="text-mist max-w-md mb-16 md:mb-0">
-          Hover a node to see how it fits into what I build.
+          Languages, tools, backend frameworks, and deployment technology I use.
         </p>
       </div>
 
@@ -59,6 +60,7 @@ export default function Skills() {
           return (
             <motion.button
               key={node.name}
+              aria-pressed={isActive}
               data-cursor-hover
               onMouseEnter={() => setActive(node.name)}
               onMouseLeave={() => setActive(null)}
@@ -103,9 +105,13 @@ export default function Skills() {
           transition={{ duration: 0.3 }}
           className="font-mono text-xs md:text-sm text-mist"
         >
-          {active
-            ? techNodes.find((n) => n.name === active)?.context
-            : ''}
+          {activeNode && (
+            <>
+              <span className="text-signal">{activeNode.category}</span>
+              <span className="mx-2 text-line" aria-hidden="true">/</span>
+              {activeNode.context}
+            </>
+          )}
         </motion.p>
       </div>
     </section>
