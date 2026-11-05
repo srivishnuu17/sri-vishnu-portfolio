@@ -279,6 +279,104 @@ body {
   color: #eceef2;
 }
 
+.contact-form {
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border: 1px solid rgba(32, 36, 44, 0.9);
+  background: rgba(18, 20, 25, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  color: #8a90a0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+  border: 1px solid rgba(32, 36, 44, 0.95);
+  border-radius: 0;
+  background: rgba(7, 8, 10, 0.65);
+  padding: 0.9rem 1rem;
+  color: #eceef2;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: normal;
+  text-transform: none;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-field textarea {
+  resize: vertical;
+  min-height: 8rem;
+}
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: #666d7b;
+}
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-color: rgba(76, 124, 255, 0.75);
+  box-shadow: 0 0 0 3px rgba(76, 124, 255, 0.1);
+}
+
+.contact-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 46px;
+  border: 1px solid #4c7cff;
+  background: #4c7cff;
+  padding: 0.75rem 1.25rem;
+  color: #07080a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.contact-submit:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #78a0ff;
+}
+
+.contact-submit:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.contact-status {
+  min-height: 1.25rem;
+  color: #8a90a0;
+  font-size: 0.82rem;
+}
+
+.contact-status--success {
+  color: #87d7a3;
+}
+
+.contact-status--error {
+  color: #ff9d9d;
+}
+
+.contact-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
 .project-visual {
   position: relative;
   border: 1px solid rgba(32, 36, 44, 0.9);

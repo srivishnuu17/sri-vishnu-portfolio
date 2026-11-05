@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowUpRight, Github, Linkedin, LoaderCircle, Mail, MapPin, Phone, Send } from 'lucide-react'
 import { profile } from '../data/content'
 
 const contactLinks = [
@@ -32,6 +33,37 @@ const contactLinks = [
 ]
 
 export default function Contact() {
+  const [formState, setFormState] = useState('idle')
+  const [formMessage, setFormMessage] = useState('')
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+    if (formState === 'sending') return
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    setFormState('sending')
+    setFormMessage('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(formData.entries())),
+      })
+      const result = await response.json().catch(() => ({}))
+
+      if (!response.ok) throw new Error(result.error || 'Your message could not be sent. Please try again.')
+
+      form.reset()
+      setFormState('success')
+      setFormMessage('Thanks for reaching out. Your message has been sent.')
+    } catch (error) {
+      setFormState('error')
+      setFormMessage(error.message || 'Your message could not be sent. Please try again.')
+    }
+  }
+
   return (
     <section id="contact" className="relative bg-void py-32 md:py-48 overflow-hidden">
       <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_100%,rgba(76,124,255,0.09),transparent_62%)]" />
@@ -96,6 +128,48 @@ export default function Contact() {
             </motion.a>
           ))}
         </div>
+
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-10%' }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="contact-form mt-10"
+        >
+          <div className="mb-7">
+            <p className="font-mono text-[10px] tracking-[0.24em] text-signal uppercase">SEND A MESSAGE</p>
+            <h3 className="mt-3 text-2xl text-bone">Have a project in mind?</h3>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            <label className="contact-field">
+              <span>Your name</span>
+              <input name="name" type="text" autoComplete="name" maxLength={100} required placeholder="Jane Smith" />
+            </label>
+            <label className="contact-field">
+              <span>Email address</span>
+              <input name="email" type="email" autoComplete="email" maxLength={254} required placeholder="jane@example.com" />
+            </label>
+          </div>
+          <label className="contact-field mt-5">
+            <span>Message</span>
+            <textarea name="message" rows={5} maxLength={5000} required placeholder="Tell me a little about what you’re working on…" />
+          </label>
+          <label className="contact-honeypot" aria-hidden="true" tabIndex={-1}>
+            Leave this field empty
+            <input name="website" type="text" autoComplete="off" tabIndex={-1} />
+          </label>
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <button type="submit" disabled={formState === 'sending'} className="contact-submit" data-cursor-hover>
+              {formState === 'sending' ? <LoaderCircle size={16} className="animate-spin" /> : <Send size={15} />}
+              {formState === 'sending' ? 'Sending…' : 'Send message'}
+            </button>
+            <p role="status" aria-live="polite" className={`contact-status contact-status--${formState}`}>
+              {formMessage}
+            </p>
+          </div>
+        </motion.form>
 
         <motion.div
           initial={{ opacity: 0 }}

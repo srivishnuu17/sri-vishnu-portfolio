@@ -51,10 +51,37 @@ All portfolio content (name, projects, skills, education) lives in `src/data/con
 
 ## Deploying
 
-This project deploys cleanly to **Vercel** or **Netlify**:
+This project deploys to **Vercel**. The static frontend can also run on **Netlify**, but the Python contact API in this repo requires Vercel's Python Functions runtime:
 
-- **Vercel**: import the GitHub repo, framework preset "Vite", no config needed.
+- **Vercel**: use the Vite preset, build command `npm run build`, and output directory `dist`. Vercel also deploys `api/contact.py` as the Python function at `/api/contact`.
 - **Netlify**: build command `npm run build`, publish directory `dist`.
+
+### Contact form setup on Vercel
+
+The contact form sends submissions through the Python function using SMTP. Add these environment variables in **Vercel → Project → Settings → Environment Variables**, for Production and Preview, then redeploy:
+
+| Variable | Value |
+| --- | --- |
+| `SMTP_HOST` | Your email provider's SMTP server, such as `smtp.gmail.com` |
+| `SMTP_PORT` | `587` for STARTTLS, or `465` for SSL |
+| `SMTP_USERNAME` | SMTP account username |
+| `SMTP_PASSWORD` | SMTP password or app password; keep it in Vercel, never in source code |
+| `CONTACT_EMAIL` | Inbox that should receive portfolio messages |
+| `SMTP_FROM_EMAIL` | Optional sender address; defaults to `SMTP_USERNAME` |
+| `SMTP_USE_SSL` | Optional: `true` for port 465, otherwise `false` for port 587 |
+
+For Gmail, create an App Password for the sending account and use it as `SMTP_PASSWORD` (Gmail accounts generally require 2-Step Verification to create one). The `From` address must be accepted by your SMTP provider. A missing or incorrect SMTP configuration makes the API return an error and the form tells the visitor to email directly.
+
+### Running the Python function locally
+
+Vite's dev server does not run Python functions. Install the Vercel CLI, add the SMTP variables to a local `.env` file (do not commit it), then run:
+
+```bash
+npm install
+npx vercel dev
+```
+
+The form posts to `/api/contact`; the Python endpoint validates input, ignores bot submissions using a honeypot field, and sends the message to the configured inbox.
 
 ## Accessibility & performance notes
 
