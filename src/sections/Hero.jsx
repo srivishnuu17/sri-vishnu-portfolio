@@ -43,6 +43,17 @@ export default function Hero() {
       />
       <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_0%,#07080a_72%)]" />
 
+      <motion.img
+        src="/sri-vishnu-cutout.png"
+        alt="Portrait of Sri Vishnu"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        className="pointer-events-none absolute z-[2] hidden -translate-x-1/2 -translate-y-1/2 select-none object-contain md:block"
+        style={{ left: '63.1%', top: '54.2%', width: 'clamp(190px, 18vw, 320px)' }}
+        draggable="false"
+      />
+
       <div className="relative z-10 max-w-6xl mx-auto w-full px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
